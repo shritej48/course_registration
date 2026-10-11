@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Edit Enrollment{% endblock %}
+{% block content %}
+<div class="form-container">
+    <h2>Edit Enrollment</h2>
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="student_name">Student Name</label>
+            <select id="student_name" name="student_name" required>
+                {% for s in students %}
+                    <option value="{{ s.student_name }}"
+                        {% if s.student_name == enrollment.student_name %}selected{% endif %}>
+                        {{ s.student_name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="course_name">Course Name</label>
+            <select id="course_name" name="course_name" required>
+                {% for c in courses %}
+                    <option value="{{ c.course_name }}"
+                        {% if c.course_name == enrollment.course_name %}selected{% endif %}>
+                        {{ c.course_name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="date">Enrollment Date</label>
+            <input type="date" id="date" name="date"
+                   value="{{ enrollment.date|date:'Y-m-d' }}" required>
+        </div>
+
+        <button type="submit" class="btn-submit">Update Enrollment</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Students{% endblock %}
+{% block content %}
+<div class="header-actions">
+    <h2>Student List</h2>
+    <a href="{% url 'student_create' %}" class="btn-add">+ New Student</a>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th><th>Name</th><th>Course</th>
+            <th>Email</th><th>Phone</th><th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for s in students %}
+        <tr>
+            <td>{{ s.student_id }}</td>
+            <td>{{ s.student_name }}</td>
+            <td>{{ s.course_name }}</td>
+            <td>{{ s.email }}</td>
+            <td>{{ s.ph }}</td>
+            <td>
+                <a href="{% url 'student_update' s.student_id %}" class="btn-action btn-edit">Edit</a>
+                <a href="{% url 'student_delete' s.student_id %}" class="btn-action btn-delete">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="6" style="text-align:center;">No students found.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

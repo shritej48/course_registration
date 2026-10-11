@@ -1,0 +1,26 @@
+<html>
+<head>
+    <title>Enrollment Table</title>
+
+
+</head>
+
+<body>
+
+ <form method="POST">
+        {% csrf_token %}
+
+        Student Name:<input type="text" id="student_name" name="student_name" value="{{enrollment.student_name}}">
+        <br><br>
+
+        Course Name:<input type="text" id="course_name" name="course_name" value="{{enrollment.course_name}}">
+        <br><br>
+
+        Enrollment Date:<input type="date" id="date" name="date" value="{{enrollment.date}}">
+        <br><br>
+
+        <input type="submit" value="submit">
+
+    </form>
+</body>
+</html>

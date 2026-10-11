@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Enrollments{% endblock %}
+{% block content %}
+<div class="header-actions">
+    <h2>Enrollment List</h2>
+    <a href="{% url 'enrollment_create' %}" class="btn-add">+ New Enrollment</a>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th><th>Student Name</th><th>Course Name</th>
+            <th>Date</th><th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for e in enrollments %}
+        <tr>
+            <td>{{ e.enrollment_id }}</td>
+            <td>{{ e.student_name }}</td>
+            <td>{{ e.course_name }}</td>
+            <td>{{ e.date }}</td>
+            <td>
+                <a href="{% url 'enrollment_update' e.enrollment_id %}" class="btn-action btn-edit">Edit</a>
+                <a href="{% url 'enrollment_delete' e.enrollment_id %}" class="btn-action btn-delete">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="5" style="text-align:center;">No enrollments found.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

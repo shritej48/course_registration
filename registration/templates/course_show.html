@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Courses{% endblock %}
+{% block content %}
+<div class="header-actions">
+    <h2>Course List</h2>
+    <a href="{% url 'course_create' %}" class="btn-add">+ New Course</a>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th><th>Course Name</th><th>Student Name</th>
+            <th>Duration</th><th>Fees</th><th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in courses %}
+        <tr>
+            <td>{{ c.course_id }}</td>
+            <td>{{ c.course_name }}</td>
+            <td>{{ c.student_name }}</td>
+            <td>{{ c.duration }}</td>
+            <td>${{ c.fees }}</td>
+            <td>
+                <a href="{% url 'course_update' c.course_id %}" class="btn-action btn-edit">Edit</a>
+                <a href="{% url 'course_delete' c.course_id %}" class="btn-action btn-delete">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="6" style="text-align:center;">No courses found.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

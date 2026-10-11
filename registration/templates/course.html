@@ -1,0 +1,28 @@
+<html>
+<head>
+    <title>Course Table</title>
+
+
+</head>
+
+<body>
+<h2>Course Details</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+
+        Course Name:<input type="text" id="course_name" name="course_name" value="{{course.course_name}}">
+        <br><br>
+
+        Duration:<input type="text" id="duration" name="duration" value="{{course.duration}}">
+        <br><br>
+
+        Fees:<input type="text" id="fees" name="fees" value="{{course.fees}}">
+        <br><br>
+
+        <input type="submit" value="submit">
+
+    </form>
+</body>
+</html>

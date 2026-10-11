@@ -1,0 +1,240 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Course Registration{% endblock %}</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+        body {
+            background: linear-gradient(145deg, #ffe4e8 0%, #ffd9e0 100%);
+            color: #4a2c35;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        nav {
+            background: linear-gradient(135deg, #d63384 0%, #b02a6b 100%);
+            width: 100%;
+            padding: 16px 0;
+            text-align: center;
+            box-shadow: 0 6px 18px rgba(214, 51, 132, 0.25);
+            border-bottom: 3px solid #f8d7da;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 18px;
+            font-weight: 600;
+            font-size: 16px;
+            letter-spacing: 0.3px;
+            transition: all 0.2s ease;
+            padding: 8px 4px;
+            border-bottom: 2px solid transparent;
+        }
+
+        nav a:hover { border-bottom-color: #ffe4e8; transform: translateY(-2px); }
+
+        .form-container {
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 20px 35px -8px rgba(214, 51, 132, 0.25),
+                        0 8px 16px -6px rgba(0, 0, 0, 0.05);
+            padding: 40px 45px;
+            width: 100%;
+            max-width: 520px;
+            margin-top: 50px;
+            border: 2px solid #f8d7da;
+        }
+
+        .form-container h2 {
+            margin-bottom: 28px;
+            color: #b02a6b;
+            text-align: center;
+            font-size: 28px;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .form-container h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 70px; height: 4px;
+            background: #d63384;
+            border-radius: 4px;
+            opacity: 0.5;
+        }
+
+        .form-group { margin-bottom: 22px; }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #721c24;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #f5c6cb;
+            border-radius: 12px;
+            font-size: 15px;
+            outline: none;
+            transition: all 0.2s ease;
+            background-color: #fffafb;
+            color: #4a2c35;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #d63384;
+            box-shadow: 0 0 0 4px rgba(214, 51, 132, 0.15);
+            background-color: #ffffff;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: linear-gradient(135deg, #d63384 0%, #b02a6b 100%);
+            color: #ffffff;
+            border: none;
+            padding: 14px;
+            border-radius: 40px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 12px;
+            box-shadow: 0 8px 18px -6px #d63384;
+            transition: all 0.25s ease;
+        }
+
+        .btn-submit:hover {
+            background: linear-gradient(135deg, #b02a6b 0%, #8f1f55 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px -8px #b02a6b;
+        }
+
+        .header-actions {
+            width: 100%;
+            max-width: 950px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 50px 0 22px;
+            padding: 0 5px;
+        }
+
+        .header-actions h2 {
+            color: #842029;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        table {
+            width: 100%;
+            max-width: 950px;
+            border-collapse: separate;
+            border-spacing: 0 8px;
+            margin-bottom: 60px;
+        }
+
+        th, td { padding: 16px 20px; text-align: left; }
+
+        th {
+            background: linear-gradient(135deg, #d63384 0%, #b02a6b 100%);
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        th:first-child { border-top-left-radius: 16px; border-bottom-left-radius: 16px; }
+        th:last-child { border-top-right-radius: 16px; border-bottom-right-radius: 16px; }
+
+        td {
+            background: #ffffff;
+            border-top: 1px solid #ffe4e8;
+            border-bottom: 1px solid #ffe4e8;
+            color: #4a2c35;
+            font-size: 15px;
+            box-shadow: 0 2px 6px rgba(214, 51, 132, 0.06);
+        }
+
+        td:first-child {
+            border-left: 1px solid #ffe4e8;
+            border-top-left-radius: 14px;
+            border-bottom-left-radius: 14px;
+        }
+        td:last-child {
+            border-right: 1px solid #ffe4e8;
+            border-top-right-radius: 14px;
+            border-bottom-right-radius: 14px;
+        }
+
+        tr:hover td { background: #fff5f7; border-color: #f8d7da; }
+
+        .btn-action {
+            padding: 7px 14px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+            color: white;
+            display: inline-block;
+            transition: all 0.2s ease;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .btn-add {
+            background: linear-gradient(135deg, #e83e8c 0%, #c2185b 100%);
+            color: white;
+            padding: 12px 26px;
+            text-decoration: none;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 15px;
+            box-shadow: 0 8px 18px -6px #e83e8c;
+        }
+
+        .btn-add:hover { background: linear-gradient(135deg, #c2185b 0%, #a0164a 100%); }
+
+        .btn-edit {
+            background: linear-gradient(135deg, #ffb703 0%, #fb8500 100%);
+            color: #2d1b00;
+        }
+        .btn-edit:hover { background: linear-gradient(135deg, #fb8500 0%, #e67300 100%); color: #fff; }
+
+        .btn-delete { background: linear-gradient(135deg, #e63946 0%, #d62828 100%); }
+        .btn-delete:hover { background: linear-gradient(135deg, #d62828 0%, #b81f1f 100%); }
+
+        @media (max-width: 700px) {
+            nav a { margin: 0 8px; font-size: 14px; }
+            .form-container { padding: 30px 22px; }
+            .header-actions { flex-direction: column; align-items: flex-start; gap: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'course_show' %}">Courses</a>
+        <a href="{% url 'student_show' %}">Students</a>
+        <a href="{% url 'enrollment_show' %}">Enrollments</a>
+        <a href="{% url 'logout' %}">Logout</a>
+    </nav>
+
+    {% block content %}{% endblock %}
+
+</body>
+</html>

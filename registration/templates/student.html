@@ -1,0 +1,30 @@
+<html>
+<head>
+    <title>Student</title>
+
+</head>
+<body>
+
+<form method="POST">
+        {% csrf_token %}
+
+        Student Name:<input type="text" id="student_name" name="student_name" value="{{student.student_name}}">
+        <br><br>
+
+        Course Name:<input type="text" id="course_name" name="course_name" value="{{student.course_name}}">
+        <br><br>
+
+        Phone:<input type="number" id="ph" name="ph" value="{{student.ph}}">
+        <br><br>
+
+        email:<input type="email" id="email" name="email" value="{{student.email}}">
+        <br><br>
+
+        <input type="submit" value="submit">
+
+
+    </form>
+
+
+</body>
+</html>
